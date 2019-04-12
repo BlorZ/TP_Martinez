@@ -10,8 +10,6 @@ import javax.jws.soap.SOAPBinding.Style;
 public interface WSPayer {
 
 	@WebMethod
-	void payer(String libelle, Float montant, Long idCompte) throws Exception;
-	
-	@WebMethod
-	String afficheNumCompte(Long idCompte);
+	String payer(String libelle, Float montant, Long idCompte);
+
 }

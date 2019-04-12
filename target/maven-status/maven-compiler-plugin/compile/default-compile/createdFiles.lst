@@ -3,11 +3,14 @@ com\istv\auth\repository\RoleRepository.class
 com\istv\auth\model\Client.class
 com\istv\auth\service\UserService.class
 com\istv\auth\service\UserServiceImpl.class
+com\istv\auth\webservices\payer\WSPayerPublisher.class
 com\istv\auth\model\User.class
 com\istv\auth\validator\UserValidator.class
 com\istv\auth\web\UserController.class
+com\istv\auth\webservices\listerusers\InfosUsers.class
 com\istv\auth\MonApplication.class
 com\istv\auth\service\ClientService.class
+com\istv\auth\webservices\listerusers\IListerClient.class
 com\istv\auth\webservices\payer\WSPayerImpl.class
 com\istv\auth\service\CompteService.class
 com\istv\auth\service\SecurityService.class
@@ -19,6 +22,7 @@ com\istv\auth\WebSecurityConfig.class
 com\istv\auth\service\VirementServiceImpl.class
 com\istv\auth\repository\CompteRepository.class
 com\istv\auth\repository\VirementRepository.class
+com\istv\auth\webservices\listerusers\ListerClient.class
 com\istv\auth\service\SecurityServiceImpl.class
 com\istv\auth\model\Compte.class
 com\istv\auth\service\CompteServiceImpl.class
