@@ -20,7 +20,7 @@
       <parameter name="className" value="com.istv.auth.webservices.payer.WSPayerImplSoapBindingImpl"/>
       <parameter name="wsdlPortType" value="WSPayerImpl"/>
       <parameter name="typeMappingVersion" value="1.2"/>
-      <operation name="payer" qname="operNS:payer" xmlns:operNS="http://payer.webservices.auth.istv.com" soapAction="" >
+      <operation name="payer" qname="operNS:payer" xmlns:operNS="http://payer.webservices.auth.istv.com" returnQName="retNS:payerReturn" xmlns:retNS="http://payer.webservices.auth.istv.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
         <parameter qname="pns:libelle" xmlns:pns="http://payer.webservices.auth.istv.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
         <parameter qname="pns:montant" xmlns:pns="http://payer.webservices.auth.istv.com" type="tns:float" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
         <parameter qname="pns:idCompte" xmlns:pns="http://payer.webservices.auth.istv.com" type="tns:long" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>

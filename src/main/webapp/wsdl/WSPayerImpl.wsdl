@@ -14,7 +14,11 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
     </complexType>
    </element>
    <element name="payerResponse">
-    <complexType/>
+    <complexType>
+     <sequence>
+      <element name="payerReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
    </element>
   </schema>
  </wsdl:types>

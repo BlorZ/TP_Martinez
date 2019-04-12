@@ -1,49 +1,41 @@
 package com.istv.auth.webservices.payer;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 import javax.jws.WebService;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.istv.auth.model.Compte;
-import com.istv.auth.model.Virement;
-import com.istv.auth.service.CompteService;
-import com.istv.auth.service.VirementService;
 
 @WebService(endpointInterface = "com.istv.auth.webservices.payer.WSPayer")
 public class WSPayerImpl implements WSPayer{
-	
-	@Autowired
-	private CompteService compteService;
-	
-	@Autowired
-	private VirementService virementService;
-	
+		
 	@Override
-	public void payer(String libelle, Float montant, Long idCompte) throws Exception {
-		Compte compte = compteService.findById(idCompte);
-		if(null == compte) {
-			throw new Exception("Le compte bancaire n'a pas été trouvé");
-		}
-		if(compte.getSolde() < montant) {
-			throw new Exception("vous n'avez pas assez d'argent pour votre achat");
+	public String payer(String libelle, Float montant, Long idCompte) {
+		try {
+			String url = "jdbc:h2:tcp://localhost/~/test";
+			Connection conn = DriverManager.getConnection(url,"","");
+			Statement stmt = conn.createStatement();
+
+			ResultSet rs;
+			rs = stmt.executeQuery("Select SOLDE FROM COMPTE WHERE id= " + idCompte);
+			Float solde = 0f;
+			while(rs.next()) {
+				solde = rs.getFloat("solde");
+			}
+
+			if(solde < montant) {
+				return "vous n'avez pas assez d'argent pour votre achat";
+			}
+
+			stmt.executeUpdate("UPDATE COMPTE SET SOLDE = SOLDE - " + montant + " WHERE ID = " + idCompte);
+			stmt.executeUpdate("INSERT INTO HISTORIQUEVERSEMENT (IDCOMPTEDESTINATAIRE, LIBELLE, MONTANTVERSEMENT)"
+					+ "VALUES (9999, \'"+ libelle+"\', "+ montant +")");
+			conn.close();
+		} catch (Exception e) {
+			return "Erreur lors du traitement " + e.getMessage();
 		}
 
-		Virement v = new Virement();
-		v.setIdCompteDestinataire(9999L); // cet id correspond à notre site e-commerce
-		v.setLibelle(libelle);
-		v.setMontantVersement(montant);
-		
-		virementService.save(v);
-		
-		compte.getVirements().add(v);
-		compte.setSolde(compte.getSolde() - montant);
-		
-		compteService.save(compte);
-	}
-	
-	@Override
-	public String afficheNumCompte(Long idCompte) {
-		
-		return "Le numéro de compte envoyé est : " + idCompte;
+		return "Virement effectué";
 	}
 }
