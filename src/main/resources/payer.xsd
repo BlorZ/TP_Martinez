@@ -1,0 +1,20 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://payer.webservices.auth.istv.com/"
+targetNamespace="http://payer.webservices.auth.istv.com/" elementFormDefault="qualified">
+ 
+    <xs:element name="WSPayerDetailRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="WSPayerRequest" type="tns:WSPayerRequest"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+ 
+    <xs:complexType name="WSPayerRequest">
+        <xs:sequence>
+            <xs:element name="libelle" type="xs:string"/>
+            <xs:element name="montant" type="xs:float"/>
+            <xs:element name="idCompte" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+     
+</xs:schema>
